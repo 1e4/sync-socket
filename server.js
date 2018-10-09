@@ -11,27 +11,43 @@ app.get('/', function (req, res) {
 
 io.on('connection', function (socket) {
 
+    let currentRoom = {},
+        socket_id = socket.id,
+        username = newUserName();
+
     console.log("user connected");
 
-
     socket.on('create room', function () {
-        let name = newName(),
-            currentRoom = {
-                name: name,
-                users: [],
-                playlist: [],
-                currentVideo: null
-            };
+        let room_name = newRoomName();
 
-        socket.join(name);
+        currentRoom = {
+            name: room_name,
+            users: [],
+            playlist: [],
+            currentVideo: null,
+            chat: []
+        };
+
+        socket.join(room_name);
 
         currentRoom['users'].push(socket.id);
 
-        console.log('Creating a new room ' + name);
+        console.log('Creating a new room ' + room_name);
 
-        rooms[name] = currentRoom;
+        rooms[room_name] = currentRoom;
 
         socket.emit('room created', currentRoom)
+    });
+
+    socket.on('chat message', function(data) {
+        console.log('sending message to ', currentRoom);
+
+        let msg = {
+            from: username,
+            message: data
+        };
+
+        socket.to(currentRoom.name).emit('chat message', msg)
     });
 
     socket.on('list users', function () {
@@ -39,12 +55,45 @@ io.on('connection', function (socket) {
     });
 
     socket.on('join room', function (room) {
+        console.log('joined room ', currentRoom)
+
         console.log(socket.id + " joining " + room.room);
 
-        if(room.room in rooms)
-            rooms[room.room]['users'].push(socket.id)
+        // Check if room exists, if not throw them out
+        if (room.room in rooms)
+        {
+            currentRoom = rooms[room.room];
+
+            rooms[room.room]['users'].push(socket.id);
+
+            socket.join(room.room);
+
+            socket.broadcast.to(room.room).emit('chat message', {
+                from: 'test',
+                message: 'Just joined'
+            })
+        }
         else
+        {
             socket.emit('room closed');
+        }
+    });
+
+    socket.on('pause video', function () {
+        console.log('sending pause to', currentRoom.name)
+        socket.to(currentRoom.name).emit('pause video')
+        // console.log('pause in room ', currentRoom)
+    });
+
+    socket.on('play video', function () {
+        console.log('sending play to', currentRoom.name)
+        socket.to(currentRoom.name).emit('play video')
+        // console.log('play in room ', currentRoom)
+    });
+
+    socket.on('disconnect', function () {
+        if (currentRoom.hasOwnProperty('users'))
+            delete currentRoom.users[socket_id]
     })
 });
 
@@ -52,11 +101,15 @@ http.listen(3000, function () {
     console.log("listening on *:3000");
 });
 
-function newName() {
+function newRoomName() {
     let name = new generator(5).generate();
 
     if (name in rooms)
-        return newName();
+        return newRoomName();
 
     return name;
+}
+
+function newUserName() {
+    return new generator(4).generate();
 }
