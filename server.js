@@ -1,6 +1,6 @@
 let app = require('express')(),
     http = require('http').Server(app),
-    io = require('socket.io')(http),
+    io = require('socket.io')(http, {origins: '*.*'}),
     generator = require('readable-url'),
     rooms = {};
 
@@ -39,7 +39,7 @@ io.on('connection', function (socket) {
         socket.emit('room created', currentRoom)
     });
 
-    socket.on('chat message', function(data) {
+    socket.on('chat message', function (data) {
         console.log('sending message to ', currentRoom);
 
         let msg = {
@@ -54,7 +54,7 @@ io.on('connection', function (socket) {
         socket.$emit('debug', socket.rooms)
     });
 
-    socket.on('switch video', function(videoId) {
+    socket.on('switch video', function (videoId) {
         socket.to(currentRoom.name).emit('switch video', videoId);
     })
 
@@ -64,8 +64,7 @@ io.on('connection', function (socket) {
         console.log(socket.id + " joining " + room.room);
 
         // Check if room exists, if not throw them out
-        if (room.room in rooms)
-        {
+        if (room.room in rooms) {
             currentRoom = rooms[room.room];
 
             rooms[room.room]['users'].push(socket.id);
@@ -77,8 +76,7 @@ io.on('connection', function (socket) {
                 message: 'Just joined'
             })
         }
-        else
-        {
+        else {
             socket.emit('room closed');
         }
     });
