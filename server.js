@@ -54,6 +54,10 @@ io.on('connection', function (socket) {
         socket.$emit('debug', socket.rooms)
     });
 
+    socket.on('switch video', function(videoId) {
+        socket.to(currentRoom.name).emit('switch video', videoId);
+    })
+
     socket.on('join room', function (room) {
         console.log('joined room ', currentRoom)
 
@@ -97,7 +101,7 @@ io.on('connection', function (socket) {
     })
 });
 
-http.listen(3000, function () {
+http.listen(3000, '0.0.0.0', function () {
     console.log("listening on *:3000");
 });
 
