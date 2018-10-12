@@ -1,6 +1,6 @@
 let app = require('express')(),
     http = require('http').Server(app),
-    io = require('socket.io')(http, {origins: '*.*'}),
+    io = require('socket.io')(http, {origins: '*:*'}),
     generator = require('readable-url'),
     rooms = {};
 
