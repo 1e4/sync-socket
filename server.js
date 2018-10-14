@@ -14,6 +14,8 @@ io.on('connection', function (socket) {
         socket_id = socket.id,
         username = newUserName();
 
+    socket.emit('client id', socket_id)
+
     console.log("user connected");
 
     socket.on('create room', function () {
@@ -24,7 +26,8 @@ io.on('connection', function (socket) {
             users: [],
             playlist: [],
             currentVideo: null,
-            chat: []
+            chat: [],
+            owner: socket.id
         };
 
         socket.join(room_name);
@@ -43,7 +46,8 @@ io.on('connection', function (socket) {
 
         let msg = {
             from: username,
-            message: data
+            message: data,
+            from_id: socket_id
         };
 
         socket.to(currentRoom.name).emit('chat message', msg)
