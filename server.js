@@ -49,19 +49,12 @@ io.on('connection', function (socket) {
         socket.to(currentRoom.name).emit('chat message', msg)
     });
 
-    socket.on('list users', function () {
-        socket.$emit('debug', socket.rooms)
-    });
-
     socket.on('switch video', function (videoId) {
+        currentRoom.currentVideo = videoId;
         socket.to(currentRoom.name).emit('switch video', videoId);
     })
 
-    socket.on('join room', function (room) {
-        console.log('joined room ', currentRoom)
-
-        console.log(socket.id + " joining " + room.room);
-
+    socket.on('join room', (room) => {
         // Check if room exists, if not throw them out
         if (room.room in rooms) {
             currentRoom = rooms[room.room];
@@ -70,10 +63,14 @@ io.on('connection', function (socket) {
 
             socket.join(room.room);
 
-            socket.broadcast.to(room.room).emit('chat message', {
+            socket.emit('load room', rooms[room.room]);
+
+            socket.to(room.room).emit('chat message', {
                 from: 'test',
                 message: 'Just joined'
-            })
+            });
+
+            console.log(socket.id + " joining", room);
         }
         else {
             socket.emit('room closed');
