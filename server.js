@@ -4,9 +4,8 @@ let app = require('express')(),
     generator = require('readable-url'),
     rooms = {};
 
-
 app.get('/', function (req, res) {
-
+    res.redirect('https://sync.stream')
 });
 
 io.on('connection', function (socket) {
