@@ -15,26 +15,29 @@
     <session id="-1900669011">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="3" />
+          <entry key="project.closed" value="4" />
+          <entry key="project.open.time.0" value="1" />
           <entry key="project.open.time.1" value="2" />
+          <entry key="project.open.time.10" value="1" />
+          <entry key="project.open.time.12" value="1" />
           <entry key="project.open.time.2" value="1" />
           <entry key="project.open.time.6" value="2" />
           <entry key="project.open.time.7" value="1" />
           <entry key="project.open.time.9" value="1" />
-          <entry key="project.opened" value="7" />
+          <entry key="project.opened" value="10" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="env" value="63" />
-          <entry key="js" value="5078" />
+          <entry key="js" value="5282" />
           <entry key="sqlite" value="1" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key=".env file" value="63" />
-          <entry key="JavaScript" value="5078" />
+          <entry key="JavaScript" value="5282" />
           <entry key="PLAIN_TEXT" value="1" />
         </counts>
       </usages-collector>
@@ -59,8 +62,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/server.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="620">
-              <caret line="61" column="26" selection-start-line="61" selection-start-column="26" selection-end-line="61" selection-end-column="26" />
+            <state relative-caret-position="268">
+              <caret line="133" column="69" lean-forward="true" selection-start-line="133" selection-start-column="69" selection-end-line="133" selection-end-column="69" />
             </state>
           </provider>
         </entry>
@@ -95,7 +98,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/knexfile.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="312">
+            <state relative-caret-position="896">
               <caret line="32" column="5" selection-start-line="32" selection-start-column="5" selection-end-line="32" selection-end-column="5" />
             </state>
           </provider>
@@ -114,14 +117,11 @@
       <find>msg</find>
       <find>sending pause</find>
       <find>pause video</find>
-      <find>load room</find>
       <find>currentvi</find>
       <find>join room</find>
       <find>'users']</find>
-      <find>waiting to b</find>
       <find>wait</find>
       <find>pause</find>
-      <find>ready to play</find>
       <find>sync</find>
       <find>syncd</find>
       <find>send(</find>
@@ -129,6 +129,13 @@
       <find>room clo</find>
       <find>discone</find>
       <find>room meta</find>
+      <find>seek to</find>
+      <find>emit('seek</find>
+      <find>load room</find>
+      <find>ready</find>
+      <find>seek back</find>
+      <find>waiting to b</find>
+      <find>ready to play</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -286,18 +293,21 @@
       <workItem from="1539616522599" duration="3824000" />
       <workItem from="1539723072604" duration="4604000" />
       <workItem from="1539768106644" duration="11473000" />
-      <workItem from="1540031945906" duration="3210000" />
+      <workItem from="1540031945906" duration="4386000" />
+      <workItem from="1540225011802" duration="599000" />
+      <workItem from="1540371478096" duration="6736000" />
+      <workItem from="1540391480540" duration="2298000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="60711000" />
+    <option name="totallyTimeSpent" value="71520000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.13539445" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.13965885" />
       <window_info id="Structure" order="1" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -391,6 +401,13 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/db.sqlite" />
+    <entry file="file://$PROJECT_DIR$/server.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="268">
+          <caret line="133" column="69" lean-forward="true" selection-start-line="133" selection-start-column="69" selection-end-line="133" selection-end-column="69" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/database/models/User.js">
       <provider selected="true" editor-type-id="text-editor">
         <state>
@@ -414,15 +431,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/knexfile.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="312">
+        <state relative-caret-position="896">
           <caret line="32" column="5" selection-start-line="32" selection-start-column="5" selection-end-line="32" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/server.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="620">
-          <caret line="61" column="26" selection-start-line="61" selection-start-column="26" selection-end-line="61" selection-end-column="26" />
         </state>
       </provider>
     </entry>

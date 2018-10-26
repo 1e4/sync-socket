@@ -27,7 +27,10 @@ io.on('connection', function (socket) {
             name: room_name,
             users: [],
             playlist: [],
-            currentVideo: null,
+            video: {
+                video: null,
+                currentPlayTime: 0
+            },
             chat: [],
             owner: socket.id,
             isPlayingNow: false
@@ -96,6 +99,14 @@ io.on('connection', function (socket) {
         socket.to(currentRoom.name).emit('pause video')
     });
 
+    socket.on('seek backwards to', (time) => {
+        io.sockets.in(currentRoom.name).emit('seek backwards to', time)
+    });
+
+    socket.on('seek forwards to', (time) => {
+        io.sockets.in(currentRoom.name).emit('seek forwards to', time)
+    });
+
     socket.on('play video', function () {
         console.log('sending play to', currentRoom.name)
         socket.to(currentRoom.name).emit('play video')
@@ -155,8 +166,8 @@ io.on('connection', function (socket) {
         console.log("Current room before disconnect after removal of current user", currentRoom, Object.keys(currentRoom['users']).length)
 
         // Clean up temporary rooms
-        if(Object.keys(currentRoom['users']).length === 0)
-            delete rooms[currentRoom.name]
+        // if(Object.keys(currentRoom['users']).length === 0)
+        //     delete rooms[currentRoom.name]
     })
 });
 
